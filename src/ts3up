@@ -9,19 +9,69 @@
 #
 
 #
-# Global variables
+# Global variables and default values
 #
 
-PATH='.'        # On default this scripts works on the current path
-VERSION='3.12.1'  # Teamspeak3-Server Version on default we are looking for the latest
-URL="http://files.teamspeak-services.com/releases/server/$VERSION/teamspeak3-server_linux_amd64-$VERSION.tar.gz"
+TS3PATH='.'        # On default this scripts works on the current path
+TS3VERSION='3.12.1'  # Teamspeak3-Server Version on default we are looking for the latest
+TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
 
+# Colors 
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+COLOREND='\033[0m'
+# --------------------------------------------------
+#                    Functions 
+# --------------------------------------------------
+
+# Handling different arguments and overwrites global variables
+# if a specific parameter isn't used, ts3up takes the default one
 function argHandler(){
-    echo $1
+    while getopts "p:v:" OPTION; do
+        case ${OPTION} in
+            v)
+                TS3VERSION=${OPTARG}
+                TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
+                ;;
+           
+            p) 
+                TS3PATH=${OPTARG}
+                ;;
+            *)
+                echo "Invalid option" >&2
+                ;;
+        esac
+    done
 }
 
-main(){
-    argHandler
+# Download Teamspeak3-Server for 64bit systems. 
+function downloadFile(){
+    if [ -d "$TS3PATH" ]; then
+        cd ../$TS3PATH
+    else
+        echo -e "${RED}ERROR:${COLOREND} $TS3PATH doesn't exist."
+        exit
+    fi
+
+    wget $TS3URL &> /dev/null
+    if [[ "$?" != 0 ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
-main
+# This function does the actual update due to the global variables
+function updateTS3Server(){
+    if downloadFile; then
+        echo -e "${RED}ERROR:${COLOREND}Failed to download Teamspeak-Server from${BLUE} $TS3URL ${COLOREND}"
+        exit
+    fi
+    
+}
+
+# --------------------------------------------------
+#                       Main 
+# --------------------------------------------------
+argHandler "$@"
+updateTS3Server
