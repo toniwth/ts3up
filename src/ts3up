@@ -1,1 +1,27 @@
 #! /bin/bash
+
+#
+# ############################################################################################
+# About: This is a little script to automate update procedure from Ts3-server based on Linux #
+# Author: Toni Wirth <toniwirth@icloud.com>                                                  #
+# License: MIT License                                                                       #
+# ############################################################################################
+#
+
+#
+# Global variables
+#
+
+PATH='.'        # On default this scripts works on the current path
+VERSION='3.12.1'  # Teamspeak3-Server Version on default we are looking for the latest
+URL="http://files.teamspeak-services.com/releases/server/$VERSION/teamspeak3-server_linux_amd64-$VERSION.tar.gz"
+
+function argHandler(){
+    echo $1
+}
+
+main(){
+    argHandler
+}
+
+main
