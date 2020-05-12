@@ -2,6 +2,8 @@
 
 #
 # ############################################################################################
+#                                           ts3up                                            #
+# Version: 0.1.0 (Developer version                                                          #
 # About: This is a little script to automate update procedure from Ts3-server based on Linux #
 # Author: Toni Wirth <toniwirth@icloud.com>                                                  #
 # License: MIT License                                                                       #
@@ -13,7 +15,7 @@
 #
 
 TS3PATH='.'        # On default this scripts works on the current path
-TS3VERSION='3.12.1'  # Teamspeak3-Server Version on default we are looking for the latest
+TS3VERSION=''  # Teamspeak3-Server Version on default we are looking for the latest
 TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
 
 # Colors 
@@ -43,6 +45,13 @@ function argHandler(){
                 ;;
         esac
     done
+}
+
+# we are saving the href links from the teamspeak server mirror to a file to update our 
+function checkLatestTS3ServerVersion(){
+   serverVersion=$(wget -t 1 -T 3 'https://files.teamspeak-services.com/releases/server/' -q -O - | grep -Ei 'a href="[0-9]+' | grep -Eo ">(.*)<" | tr -d ">" | tr -d "<" | uniq | sort -V -r | grep -iv "exp")
+   version=$(echo -e $serverVersion |  awk '{print $1;}')
+   echo $version
 }
 
 # Download Teamspeak3-Server for 64bit systems. 
@@ -96,5 +105,6 @@ function updateTS3Server(){
 # --------------------------------------------------
 #                       Main 
 # --------------------------------------------------
+TS3VERSION=$(checkLatestTS3ServerVersion)
 argHandler "$@"
 updateTS3Server
