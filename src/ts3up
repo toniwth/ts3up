@@ -19,6 +19,7 @@ TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspea
 # Colors 
 RED='\033[0;31m'
 BLUE='\033[0;34m'
+GREEN='\033[0;32m'
 COLOREND='\033[0m'
 # --------------------------------------------------
 #                    Functions 
@@ -38,7 +39,7 @@ function argHandler(){
                 TS3PATH=${OPTARG}
                 ;;
             *)
-                echo "Invalid option" >&2
+                echo -e "${RED}ts3up-ERROR:${COLOREND} Invalid option" >&2
                 ;;
         esac
     done
@@ -49,7 +50,7 @@ function downloadFile(){
     if [ -d "$TS3PATH" ]; then
         cd ../$TS3PATH
     else
-        echo -e "${RED}ERROR:${COLOREND} $TS3PATH doesn't exist."
+        echo -e "${RED}ts3up-ERROR:${COLOREND} $TS3PATH doesn't exist."
         exit
     fi
 
@@ -63,11 +64,33 @@ function downloadFile(){
 
 # This function does the actual update due to the global variables
 function updateTS3Server(){
-    if downloadFile; then
-        echo -e "${RED}ERROR:${COLOREND}Failed to download Teamspeak-Server from${BLUE} $TS3URL ${COLOREND}"
-        exit
+    zipName="teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
+    ts3StartScript="$TS3PATH/ts3server_startscript.sh"
+
+    if [ -f $ts3StartScript ]; then
+         sh "$ts3StartScript stop"
+         echo -e "ts3up: TS3-Server now offline while updating..."
+    else
+         echo -e "${RED}ts3up-ERROR:${COLOREND} No ${BLUE}ts3server_startscript.sh${COLOREND} found."
+         exit
     fi
     
+    if downloadFile; then
+         echo -e "${RED}ts3up-ERROR:${COLOREND}Failed to download Teamspeak-Server from${BLUE} $TS3URL ${COLOREND}"
+         exit
+    fi
+    
+    if tar xvfj $zipName; then
+        echo -e "ts3up: Teamspeak3-Server successfully updated..."
+        rm -r $zipName
+        echo "ts3up: bz2 file successfully deleted ..."
+        sh "$ts3StartScript start"
+        echo -e "ts3up: TS3-Server is now online"
+        echo -e "ts3up: ${GREEN}finished!${COLOREND}"
+    else
+        echo -e "${RED}ts3up-ERROR:${COLOREND}Failed to unzip ${BLUE}$zipName${COLOREND}"
+        exit
+    fi  
 }
 
 # --------------------------------------------------
