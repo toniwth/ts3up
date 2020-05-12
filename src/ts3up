@@ -27,16 +27,37 @@ COLOREND='\033[0m'
 #                    Functions 
 # --------------------------------------------------
 
+function helper(){
+    echo "-------------------------ts3up--------------------------"
+    echo ""
+    echo "Usage:"
+    echo "--------------------------------------------------------"
+    echo "ts3up [OPTION] argument"
+    echo "Options"
+    echo "-v <versionnumber>    Update server to <versionnumber>. On default it's the current version"
+    echo "-p PATH               Set the path where the ts3-server files are. Default it the current directory"
+    echo "-h                    Displays the usage of the tool"
+    echo ""
+    echo "Example"
+    echo "--------------------------------------------------------"
+    echo "ts3up -v 3.12.1"
+    echo "ts3up -v 3.12.1 -h ~/teamspeak_files/"
+    echo "--------------------------------------------------------"
+    echo ""
+}
 # Handling different arguments and overwrites global variables
 # if a specific parameter isn't used, ts3up takes the default one
 function argHandler(){
-    while getopts "p:v:" OPTION; do
+    while getopts "p:v:h" OPTION; do
         case ${OPTION} in
             v)
                 TS3VERSION=${OPTARG}
                 TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
                 ;;
-           
+    
+            h)  helper
+                exit
+                ;;
             p) 
                 TS3PATH=${OPTARG}
                 ;;
