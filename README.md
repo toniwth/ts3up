@@ -15,12 +15,15 @@ With time there will be more features until the final version will be released.
  ### Options:
   
   *-v \<versionnumber\>* 
+  
 	Update server to <versionnumber>. On default it's the current version"
 
  *-p \<path\>* 
+ 
  Set the path where the ts3-server files are. Default it the current directory"
  
  *-h*
+ 
  Displays the usage of the tool
 
 ### Example:
