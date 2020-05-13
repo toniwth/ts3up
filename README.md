@@ -12,7 +12,7 @@ With time there will be more features until the final version will be released.
  5. ```./install```
  
  ### Uninstall
- ```rm /usr/local/bin/ts3up```
+ - ```rm /usr/local/bin/ts3up```
  
 # Usage
 ### Syntax:
