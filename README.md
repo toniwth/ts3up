@@ -1,7 +1,7 @@
 # ts3up
 **ts3up** is a little helper tool to automate a Teamspeak3-Server update on a 64bit linux-system.
 The current developer version is *0.1.0*
-With time there will be more features until the final version will be released.
+With time there will be more features.
 
 # Installation
 
@@ -27,7 +27,7 @@ Update server to <versionnumber>. By default it takes the current version"
 
  *-p \<path\>* 
  
- Set the path where the ts3-server files are. By default it the current directory"
+ Set the path where the ts3-server files are. By default it takes current path"
  
  *-h*
  
