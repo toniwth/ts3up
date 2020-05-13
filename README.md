@@ -5,8 +5,15 @@ With time there will be more features until the final version will be released.
 
 # Installation
 
- - In progress
-
+ 1. Download the **ts3up** project
+ 2. Unzip it
+ 3. ```cd ts3up-master```
+ 4. ```chmod +x install```
+ 5. ```./install```
+ 
+ ### Uninstall
+ ```rm /usr/local/bin/ts3up```
+ 
 # Usage
 ### Syntax:
 
