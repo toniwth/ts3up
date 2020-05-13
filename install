@@ -1,0 +1,25 @@
+#! /bin/bash
+#
+# ######################################################## #
+# About: Install script which make ts3up available in bash #
+# Author: Toni Wirth <toniwirth@icloud.com>                #
+# ######################################################## #
+#
+
+# Colors for echo
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+GREEN='\033[0;32m'
+COLOREND='\033[0m'
+
+# Global variable
+TS3PATH='/usr/local/bin'
+TOOLNAME='ts3up'
+
+if [ ! -f "src/$TOOLNAME" ]; then
+    echo -e "${RED}ts3up-ERROR:${COLOREND} ts3up file not found in src."
+    exit
+fi
+
+cp "src/$TOOLNAME" $TS3PATH
+chmod +x "$TS3PATH/ts3up"
