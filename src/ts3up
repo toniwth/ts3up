@@ -15,7 +15,7 @@
 #
 
 TS3PATH='.'        # On default this scripts works on the current path
-TS3VERSION=''  # Teamspeak3-Server Version on default we are looking for the latest
+TS3VERSION=''      # Teamspeak3-Server Version by default we are looking for the latest
 TS3URL="http://files.teamspeak-services.com/releases/server/$TS3VERSION/teamspeak3-server_linux_amd64-$TS3VERSION.tar.bz2"
 
 # Colors 
@@ -34,7 +34,7 @@ function helper(){
     echo "--------------------------------------------------------"
     echo "ts3up [OPTION] argument"
     echo "Options"
-    echo "-v <versionnumber>    Update server to <versionnumber>. On default it's the current version"
+    echo "-v <versionnumber>    Update server to <versionnumber>. By default it's the current version"
     echo "-p PATH               Set the path where the ts3-server files are. Default it the current directory"
     echo "-h                    Displays the usage of the tool"
     echo ""
