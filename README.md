@@ -23,11 +23,11 @@ With time there will be more features until the final version will be released.
   
   *-v \<versionnumber\>* 
   
-Update server to <versionnumber>. On default it's the current version"
+Update server to <versionnumber>. By default it's the current version"
 
  *-p \<path\>* 
  
- Set the path where the ts3-server files are. Default it the current directory"
+ Set the path where the ts3-server files are. By default it the current directory"
  
  *-h*
  
