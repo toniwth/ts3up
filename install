@@ -22,4 +22,18 @@ if [ ! -f "src/$TOOLNAME" ]; then
 fi
 
 cp "src/$TOOLNAME" $TS3PATH
+echo "Copy $TOOLNAME to $TS3PATH finished"
+
+if [ $? != 0 ]; then
+    echo -e "${RED}ts3up-ERROR:${COLOREND} Failed to copy $TOOLNAME."
+    exit
+fi
+
 chmod +x "$TS3PATH/ts3up"
+if [ $? != 0 ]; then
+    echo -e "${RED}ts3up-ERROR:${COLOREND} Failed to chmod $TOOLNAME."
+    rm "$TS3PATH/$TOOLNAME"
+    exit
+fi
+
+echo -e "${GREEN}Finished installing.${COLOREND}"
