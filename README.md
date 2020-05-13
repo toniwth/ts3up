@@ -27,7 +27,7 @@ Update server to <versionnumber>. By default it takes the current version"
 
  *-p \<path\>* 
  
- Set the path where the ts3-server files are. By default it the current directory"
+ Set the path where the ts3-server files are. By default it takes current path"
  
  *-h*
  
