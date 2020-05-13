@@ -23,7 +23,7 @@ With time there will be more features until the final version will be released.
   
   *-v \<versionnumber\>* 
   
-Update server to <versionnumber>. By default it's the current version"
+Update server to <versionnumber>. By default it takes the current version"
 
  *-p \<path\>* 
  
